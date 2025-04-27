@@ -1,0 +1,4 @@
+*.exe
+cmds
+build
+.vscode
