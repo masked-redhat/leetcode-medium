@@ -4,6 +4,9 @@
 // Output: [1, 2, 3, 4, 5, 6, 7]
 // Why: previous consecutive smaller and equal how many
 
+// Arr: [100, 80, 60, 70, 60, 75, 85]
+// Output: [1 1 1 2 1 4 6]
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -20,9 +23,7 @@ vector<int> ssp(vector<int> &arr)
             s.pop();
 
         if (s.empty())
-            res.push_back(1);
-        else if (s.top() == i - 1 || s.top() == i)
-            res.push_back(1);
+            res.push_back(i + 1);
         else
             res.push_back(i - s.top());
 
@@ -34,7 +35,7 @@ vector<int> ssp(vector<int> &arr)
 
 int main()
 {
-    vector<int> arr{100, 60, 80, 50, 60, 70, 60, 75, 85};
+    vector<int> arr{100, 60, 80, 50, 60, 70, 60, 75, 85, 1300};
 
     cout << "SSP : ";
     for (auto x : ssp(arr))
