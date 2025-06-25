@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// Binary search for lowest greater than by indices
 int greater_bs(vector<int> &org, vector<int> &inds, int val)
 {
     int low = 0, high = inds.size() - 1;
@@ -24,6 +25,55 @@ int greater_bs(vector<int> &org, vector<int> &inds, int val)
     return curr_greatest;
 }
 
+// Farthest greatest to left
+vector<int> fgl(vector<int> &arr)
+{
+    vector<int> res;
+    vector<int> lgs;
+    int arrSize = arr.size();
+
+    for (int i = 0; i < arrSize; i++)
+    {
+        int greater = greater_bs(arr, lgs, arr[i]);
+
+        if (greater != -1)
+            res.push_back(greater);
+        else
+        {
+            res.push_back(i);
+            lgs.push_back(i);
+        }
+    }
+
+    return res;
+}
+
+// Farthest greatest to right
+vector<int> fgr(vector<int> &arr)
+{
+    vector<int> res;
+    vector<int> lgs;
+    int arrSize = arr.size();
+
+    for (int i = arrSize - 1; i >= 0; i--)
+    {
+        int greater = greater_bs(arr, lgs, arr[i]);
+
+        if (greater != -1)
+            res.push_back(greater);
+        else
+        {
+            res.push_back(i);
+            lgs.push_back(i);
+        }
+    }
+
+    reverse(res.begin(), res.end());
+
+    return res;
+}
+
+// Max area
 int maxArea(vector<int> &height)
 {
     int maximum = 0, hSize = height.size();
@@ -56,9 +106,10 @@ int maxArea(vector<int> &height)
 
 int main()
 {
-    vector<int> heights{4, 4};
+    vector<int> arr1{100, 80, 60, 70, 110, 75, 85, 120, 40, 20, 10, 245, 65};
+    vector<int> arr2{1, 1};
 
-    cout << "Max area : " << maxArea(heights) << endl;
+    cout << maxArea(arr2) << endl;
 
     return 0;
 }
